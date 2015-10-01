@@ -17,8 +17,8 @@ this software. If not, see http://creativecommons.org/publicdomain/zero/1.0/
 #include "lcd.h"
 
 #define BUZZER      3
-#define WORK_TIME   2
-#define BREAK_TIME  1
+#define WORK_TIME   25
+#define BREAK_TIME  5
 
 bool is_break;
 bool flash = true;
@@ -33,6 +33,7 @@ void setup() {
 
   Timer1.initialize(1000000);
   Timer1.attachInterrupt(handler);
+  Serial.begin(9600);
 }
 
 void handler() {
@@ -101,3 +102,13 @@ void loop() {
     flash = false;
   }
 }
+
+void serialEvent() {
+  Serial.read();
+  if (!is_break) {
+    flash = true;
+    minutes += 1;
+    tone(BUZZER, 440, 1000);
+  }
+}
+

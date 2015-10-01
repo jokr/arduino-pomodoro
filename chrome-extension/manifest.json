@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Arduino Pomodoro Extension",
+  "description": "This extension tracks whether the user visits Facebook while working.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["https://www.facebook.com/*"],
+    "js": ["myscript.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "management"
+  ]
+}
